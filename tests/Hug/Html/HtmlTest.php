@@ -234,7 +234,7 @@ final class HtmlTest extends TestCase
     {
         $test = Html::get_links($this->html_links);
         $this->assertInternalType('array', $test);
-        $this->assertEquals(count($test)===59);
+        $this->assertTrue(count($test)===59);
     }
 
 
@@ -249,7 +249,7 @@ final class HtmlTest extends TestCase
     {
         $test = Html::get_external_links($this->html_links, $this->url_links);
         $this->assertInternalType('array', $test);
-        $this->assertEquals(count($test)===58);
+        $this->assertTrue(count($test)===58);
     }
 
     /* ************************************************* */
@@ -263,7 +263,7 @@ final class HtmlTest extends TestCase
     {
         $test = Html::get_internal_links($this->html_links, $this->url_links);
         $this->assertInternalType('array', $test);
-        $this->assertEquals(count($test)===59);
+        $this->assertTrue(count($test)===59);
     }
 
     /* ************************************************* */
