@@ -17,12 +17,17 @@ final class HtmlTest extends TestCase
 	public $html;
     public $html_spa;
 
+    public $html_links;
+    public $url_links;
+
 	function __construct()
 	{
 		$data = realpath(__DIR__ . '/../../../data');
 		$this->html = file_get_contents($data . '/free.fr.html');
         $this->html_spa = file_get_contents($data . '/spa.html');
 
+        $this->html_links = file_get_contents($data . '/hugo.maugey.fr.html');
+        $this->url_links = 'https://hugo.maugey.fr/developeur-web/Linux?_escaped_fragment_';
 	}
     /* ************************************************* */
     /* ************* Html::is_external_link ************ */
@@ -216,6 +221,49 @@ final class HtmlTest extends TestCase
         $this->assertInternalType('boolean', $test);
         $this->assertTrue($test);
 
+    }
+
+    /* ************************************************* */
+    /* ***************** Html::get_links *************** */
+    /* ************************************************* */
+
+    /**
+     *
+     */
+    public function testCanGetLinks()
+    {
+        $test = Html::get_links($this->html_links);
+        $this->assertInternalType('array', $test);
+        $this->assertEquals(count($test)===59);
+    }
+
+
+    /* ************************************************* */
+    /* ************ Html::get_external_links *********** */
+    /* ************************************************* */
+
+    /**
+     *
+     */
+    public function testCanGetExternalLinks()
+    {
+        $test = Html::get_external_links($this->html_links, $this->url_links);
+        $this->assertInternalType('array', $test);
+        $this->assertEquals(count($test)===58);
+    }
+
+    /* ************************************************* */
+    /* ************ Html::get_internal_links *********** */
+    /* ************************************************* */
+
+    /**
+     *
+     */
+    public function testCanGetInternalLinks()
+    {
+        $test = Html::get_internal_links($this->html_links, $this->url_links);
+        $this->assertInternalType('array', $test);
+        $this->assertEquals(count($test)===59);
     }
 
     /* ************************************************* */

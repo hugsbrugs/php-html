@@ -12,6 +12,7 @@
     "minimum-stability": "dev",
     "require": {
         "hugsbrugs/php-xpath": "dev-master",
+        "hugsbrugs/php-string": "dev-master",
         "h0gar/xpath": "^0.1.4"
     },
     "require-dev": {

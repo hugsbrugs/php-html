@@ -4,6 +4,7 @@ namespace Hug\Html;
 
 use Hug\Http\Http;
 use Hug\Xpath\Xpath;
+use Hug\HString\HString as HString;
 
 /**
  *
@@ -516,8 +517,92 @@ class Html
         return $is_spa;
     }
 
+    /**
+     * Get All links from HTML page
+     *
+     * @param string $html
+     * @return array $links
+     */
+    public static function get_links($html)
+    {
+        $links = [];
 
+        $myDom = new \DOMDocument;
+        @$myDom->loadHTML($html);
+        $xpath = new \DOMXPath($myDom);
 
+        # HTML5
+        $QueryResults = $xpath->query('//a');
+        foreach ($QueryResults as $QueryResult)
+        {
+            $links[] = [
+                'href' => $QueryResult->getAttribute('href'),
+                'title' => $QueryResult->getAttribute('title'),
+                'rel' => $QueryResult->getAttribute('rel'),
+                'target' => $QueryResult->getAttribute('target'),
+            ];
+        }
+        
+        return $links;
+    }
+
+    /**
+     * Get All External Links of given webpage
+     *
+     * @param string $html
+     * @param string $url Webpage URL or Webpage domain
+     * @return array $external_links
+     */
+    public static function get_external_links($html, $url)
+    {
+        $external_links = [];
+
+        $domain = Http::extract_domain_from_url($url);
+
+        $links = Html::get_links($html);
+        foreach ($links as $key => $link)
+        {
+            $href = $link['href'];
+            if($href!=='' && substr($href, 0, 1)!=='#' && (HString::starts_with($href, 'http://') || HString::starts_with($href, 'https://') || HString::starts_with($href, '//')))
+            {
+                $domain_link = Http::extract_domain_from_url($href);
+                // error_log($domain_link.' ? '.$domain);
+                if($domain_link!==$domain)
+                {
+                    $external_links[] = $link;        
+                }
+            }
+        }
+
+        return $external_links;
+    }
+
+    /**
+     * Get All Internal Links of given webpage
+     *
+     * @param string $html
+     * @param string $url Webpage URL or Webpage domain
+     * @return array $internal_links
+     */
+    public static function get_internal_links($html, $url)
+    {
+        $internal_links = [];
+
+        $domain = Http::extract_domain_from_url($url);
+
+        $links = Html::get_links($html);
+        foreach ($links as $key => $link)
+        {
+            $href = $link['href'];
+            $domain_link = Http::extract_domain_from_url($href);
+            if(substr($href, 0, 1)==='#' || substr($href, 0, 1)==='/' || $domain_link===$domain)
+            {
+                $internal_links[] = $link;        
+            }
+        }
+
+        return $internal_links;
+    }
 
 
     /* ****************************************************** */

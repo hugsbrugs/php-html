@@ -116,6 +116,36 @@ $test = Html::extract_body_content($html);
 echo 'Html::extract_body_content' . "\n";
 echo var_dump($test) . "\n";
 
+
+
+/* ************************************************* */
+/* ***************** Html::get_links *************** */
+/* ************************************************* */
+$html = file_get_contents(__DIR__ . '/../data/hugo.maugey.fr.html');
+$url = 'https://hugo.maugey.fr/developeur-web/Linux?_escaped_fragment_';
+$test = Html::get_links($html);
+echo 'Html::get_links' . "\n";
+echo var_dump($test) . "\n";
+
+/* ************************************************* */
+/* ************ Html::get_external_links *********** */
+/* ************************************************* */
+
+$test = Html::get_external_links($html, $url);
+echo 'Html::get_external_links' . "\n";
+echo var_dump($test) . "\n";
+
+/* ************************************************* */
+/* ************ Html::get_internal_links *********** */
+/* ************************************************* */
+
+$test = Html::get_internal_links($html, $url);
+echo 'Html::get_internal_links' . "\n";
+echo var_dump($test) . "\n";
+
+
+
+
 /* ************************************************* */
 /* **************** Html::DJNikMail **************** */
 /* ************************************************* */
