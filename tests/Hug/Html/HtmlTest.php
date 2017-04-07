@@ -15,11 +15,13 @@ use Hug\Html\Html as Html;
 final class HtmlTest extends TestCase
 {
 	public $html;
+    public $html_spa;
 
 	function __construct()
 	{
 		$data = realpath(__DIR__ . '/../../../data');
 		$this->html = file_get_contents($data . '/free.fr.html');
+        $this->html_spa = file_get_contents($data . '/spa.html');
 
 	}
     /* ************************************************* */
@@ -195,6 +197,25 @@ final class HtmlTest extends TestCase
     {
     	$test = Html::extract_body_content($this->html);
         $this->assertInternalType('string', $test);
+    }
+
+    /* ************************************************* */
+    /* ****************** Html::is_spa ***************** */
+    /* ************************************************* */
+
+    /**
+     *
+     */
+    public function testCanIsSpa()
+    {
+        $test = Html::is_spa($this->html);
+        $this->assertInternalType('boolean', $test);
+        $this->assertFalse($test);
+
+        $test = Html::is_spa($this->html_spa);
+        $this->assertInternalType('boolean', $test);
+        $this->assertTrue($test);
+
     }
 
     /* ************************************************* */

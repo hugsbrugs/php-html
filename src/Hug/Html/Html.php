@@ -483,6 +483,43 @@ class Html
         return $extracted_text;
     }
 
+    /**
+     * A SPA website sometimes contains meta
+     * <meta name="fragment" content="!">
+     * to tell search engine to request another URL to get 
+     * populated HTML webpage instead of ajax populated page
+     *
+     * @param string $html
+     * @return bool $is_spa
+     */
+    public static function is_spa($html)
+    {
+        $is_spa = false;
+
+        $myDom = new \DOMDocument;
+        @$myDom->loadHTML($html);
+        $xpath = new \DOMXPath($myDom);
+
+        # HTML5
+        $QueryResults = $xpath->query('//meta[@name="fragment"]');// /@content
+        foreach ($QueryResults as $QueryResult)
+        {
+            $content = $QueryResult->getAttribute('content');
+            //error_log('CHARSET HTML5 : ' . $charset);
+            if(isset($content) && $content==='!')
+            {
+                //error_log('is SPA HTML 5');
+                $is_spa = true;
+            }
+        }
+        
+        return $is_spa;
+    }
+
+
+
+
+
     /* ****************************************************** */
     /* ****************************************************** */
     /*                           EMAILS                       */

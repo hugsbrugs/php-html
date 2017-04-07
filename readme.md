@@ -75,6 +75,12 @@ Extract <body> content from HTML page
 $body = Html::extract_body_content($html);
 ```
 
+Check for <meta name="fragment" content="!"> tag
+```php
+$is_spa = Html::is_spa($html);
+```
+
+
 Obfuscate email to be incorporated in HTML
 ```php
 $email = Html::DJNikMail($str = 'tatayoyo@free.fr');
