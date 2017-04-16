@@ -29,6 +29,7 @@ final class HtmlTest extends TestCase
         $this->html_links = file_get_contents($data . '/hugo.maugey.fr.html');
         $this->url_links = 'https://hugo.maugey.fr/developeur-web/Linux?_escaped_fragment_';
 	}
+
     /* ************************************************* */
     /* ************* Html::is_external_link ************ */
     /* ************************************************* */
@@ -249,7 +250,7 @@ final class HtmlTest extends TestCase
     {
         $test = Html::get_external_links($this->html_links, $this->url_links);
         $this->assertInternalType('array', $test);
-        $this->assertTrue(count($test)===58);
+        $this->assertTrue(count($test)===3);
     }
 
     /* ************************************************* */
@@ -263,7 +264,7 @@ final class HtmlTest extends TestCase
     {
         $test = Html::get_internal_links($this->html_links, $this->url_links);
         $this->assertInternalType('array', $test);
-        $this->assertTrue(count($test)===59);
+        $this->assertTrue(count($test)===52);
     }
 
     /* ************************************************* */
