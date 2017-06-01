@@ -116,7 +116,21 @@ $test = Html::extract_body_content($html);
 echo 'Html::extract_body_content' . "\n";
 echo var_dump($test) . "\n";
 
+/* ************************************************* */
+/* ****************** Html::is_spa ***************** */
+/* ************************************************* */
 
+$test = Html::is_spa($html);
+echo 'Html::is_spa' . "\n";
+echo var_dump($test) . "\n";
+
+/* ************************************************* */
+/* *********** Html::add_escaped_fragment ********** */
+/* ************************************************* */
+
+$test = Html::add_escaped_fragment($url);
+echo 'Html::add_escaped_fragment' . "\n";
+echo var_dump($test) . "\n";
 
 /* ************************************************* */
 /* ***************** Html::get_links *************** */

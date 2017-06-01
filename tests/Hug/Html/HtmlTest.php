@@ -225,6 +225,19 @@ final class HtmlTest extends TestCase
     }
 
     /* ************************************************* */
+    /* *********** Html::add_escaped_fragment ********** */
+    /* ************************************************* */
+
+    /**
+     *
+     */
+    public function testCanAddEscapedFragment()
+    {
+        $test = Html::add_escaped_fragment($this->url);
+        $this->assertInternalType('string', $test);
+    }
+
+    /* ************************************************* */
     /* ***************** Html::get_links *************** */
     /* ************************************************* */
 
