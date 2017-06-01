@@ -81,6 +81,27 @@ $is_spa = Html::is_spa($html);
 ```
 
 
+Get all links
+```php
+$links = Html::get_links($html);
+```
+
+Get external links
+```php
+$external_links = Html::get_external_links($html);
+```
+
+Get internal links
+```php
+$internal_links = Html::get_internal_links($html);
+
+```
+Get images
+```php
+$images = Html::get_images($html);
+```
+
+
 Obfuscate email to be incorporated in HTML
 ```php
 $email = Html::DJNikMail($str = 'tatayoyo@free.fr');
