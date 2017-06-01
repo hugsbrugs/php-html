@@ -143,8 +143,13 @@ $test = Html::get_internal_links($html, $url);
 echo 'Html::get_internal_links' . "\n";
 echo var_dump($test) . "\n";
 
+/* ************************************************* */
+/* **************** Html::get_images *************** */
+/* ************************************************* */
 
-
+$test = Html::get_images($html);
+echo 'Html::get_images' . "\n";
+echo var_dump($test) . "\n";
 
 /* ************************************************* */
 /* **************** Html::DJNikMail **************** */

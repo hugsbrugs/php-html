@@ -604,6 +604,33 @@ class Html
         return $internal_links;
     }
 
+    /**
+     * Get All images from HTML page
+     *
+     * @param string $html
+     * @return array $images
+     */
+    public static function get_images($html)
+    {
+        $images = [];
+
+        $myDom = new \DOMDocument;
+        @$myDom->loadHTML($html);
+        $xpath = new \DOMXPath($myDom);
+
+        # HTML5
+        $QueryResults = $xpath->query('//img');
+        foreach ($QueryResults as $QueryResult)
+        {
+            $images[] = [
+                'src' => $QueryResult->getAttribute('src'),
+                'alt' => $QueryResult->getAttribute('alt'),
+            ];
+        }
+        
+        return $images;
+    }
+
 
     /* ****************************************************** */
     /* ****************************************************** */

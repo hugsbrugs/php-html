@@ -268,6 +268,20 @@ final class HtmlTest extends TestCase
     }
 
     /* ************************************************* */
+    /* **************** Html::get_images *************** */
+    /* ************************************************* */
+
+    /**
+     *
+     */
+    public function testCanGetImages()
+    {
+        $test = Html::get_images($this->html_links);
+        $this->assertInternalType('array', $test);
+        $this->assertTrue(count($test)===29);
+    }
+
+    /* ************************************************* */
     /* **************** Html::DJNikMail **************** */
     /* ************************************************* */
 
