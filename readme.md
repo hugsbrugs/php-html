@@ -107,6 +107,11 @@ Obfuscate email to be incorporated in HTML
 $email = Html::DJNikMail($str = 'tatayoyo@free.fr');
 ```
 
+## Unit Tests
+
+```
+phpunit --bootstrap vendor/autoload.php tests
+```
 
 ## Author
 

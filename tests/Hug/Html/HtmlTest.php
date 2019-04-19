@@ -20,7 +20,7 @@ final class HtmlTest extends TestCase
     public $html_links;
     public $url_links;
 
-	function __construct()
+	function setUp(): void
 	{
 		$data = realpath(__DIR__ . '/../../../data');
 		$this->html = file_get_contents($data . '/free.fr.html');
@@ -93,7 +93,7 @@ final class HtmlTest extends TestCase
     {
 		$page_url = 'http://portail.free.fr/m/';
     	$test = Html::replace_rel_to_abs_paths($this->html, $page_url);
-        $this->assertInternalType('string', $test);
+        $this->assertIsString($test);
     }
 
     /* ************************************************* */
@@ -108,7 +108,7 @@ final class HtmlTest extends TestCase
 		$rel = '/js/script.js';
 		$base = 'http://portail.free.fr/m/';
     	$test = Html::rel_to_abs($rel, $base);
-        $this->assertInternalType('string', $test);
+        $this->assertIsString($test);
     }
 
     /* ************************************************* */
@@ -122,7 +122,7 @@ final class HtmlTest extends TestCase
     {
 		$domain = 'www.free.fr';
     	$test = Html::find_backlinks($this->html, $domain);
-        $this->assertInternalType('array', $test);
+        $this->assertIsArray($test);
     }
 
     /* ************************************************* */
@@ -136,7 +136,7 @@ final class HtmlTest extends TestCase
     {
 		$canonical_content = 'index, follow, noindex, noarchive';
     	$test = Html::get_canonicals($canonical_content);
-        $this->assertInternalType('array', $test);
+        $this->assertIsArray($test);
     }
 
     /* ************************************************* */
@@ -149,7 +149,7 @@ final class HtmlTest extends TestCase
     public function testCanSetHrefSsl()
     {
     	$test = Html::set_href_ssl($this->html);
-        $this->assertInternalType('string', $test);
+        $this->assertIsString($test);
     }
 
     /* ************************************************* */
@@ -162,7 +162,7 @@ final class HtmlTest extends TestCase
     public function testCanSetCharsetUtf8()
     {
     	$test = Html::set_charset_utf_8($this->html);
-        $this->assertInternalType('string', $test);
+        $this->assertIsString($test);
     }
 
     /* ************************************************* */
@@ -176,7 +176,7 @@ final class HtmlTest extends TestCase
     {
 		$domain = 'free.fr';
     	$test = Html::remove_external_links($this->html, $domain);
-        $this->assertInternalType('string', $test);
+        $this->assertIsString($test);
     }
 
     /* ************************************************* */
@@ -189,7 +189,7 @@ final class HtmlTest extends TestCase
     public function testCanRemoveScriptStyle()
     {
     	$test = Html::remove_script_style($this->html);
-        $this->assertInternalType('string', $test);
+        $this->assertIsString($test);
     }
 
     /* ************************************************* */
@@ -202,7 +202,7 @@ final class HtmlTest extends TestCase
     public function testCanExtractBodyContent()
     {
     	$test = Html::extract_body_content($this->html);
-        $this->assertInternalType('string', $test);
+        $this->assertIsString($test);
     }
 
     /* ************************************************* */
@@ -215,11 +215,11 @@ final class HtmlTest extends TestCase
     public function testCanIsSpa()
     {
         $test = Html::is_spa($this->html);
-        $this->assertInternalType('boolean', $test);
+        $this->assertIsBool($test);
         $this->assertFalse($test);
 
         $test = Html::is_spa($this->html_spa);
-        $this->assertInternalType('boolean', $test);
+        $this->assertIsBool($test);
         $this->assertTrue($test);
 
     }
@@ -233,8 +233,8 @@ final class HtmlTest extends TestCase
      */
     public function testCanAddEscapedFragment()
     {
-        $test = Html::add_escaped_fragment($this->url);
-        $this->assertInternalType('string', $test);
+        $test = Html::add_escaped_fragment('https://hugo.maugey.fr/developeur-web');
+        $this->assertIsString($test);
     }
 
     /* ************************************************* */
@@ -247,7 +247,7 @@ final class HtmlTest extends TestCase
     public function testCanGetLinks()
     {
         $test = Html::get_links($this->html_links);
-        $this->assertInternalType('array', $test);
+        $this->assertIsArray($test);
         $this->assertTrue(count($test)===59);
     }
 
@@ -262,7 +262,7 @@ final class HtmlTest extends TestCase
     public function testCanGetExternalLinks()
     {
         $test = Html::get_external_links($this->html_links, $this->url_links);
-        $this->assertInternalType('array', $test);
+        $this->assertIsArray($test);
         $this->assertTrue(count($test)===3);
     }
 
@@ -276,7 +276,7 @@ final class HtmlTest extends TestCase
     public function testCanGetInternalLinks()
     {
         $test = Html::get_internal_links($this->html_links, $this->url_links);
-        $this->assertInternalType('array', $test);
+        $this->assertIsArray($test);
         $this->assertTrue(count($test)===52);
     }
 
@@ -290,7 +290,7 @@ final class HtmlTest extends TestCase
     public function testCanGetImages()
     {
         $test = Html::get_images($this->html_links);
-        $this->assertInternalType('array', $test);
+        $this->assertIsArray($test);
         $this->assertTrue(count($test)===29);
     }
 
@@ -305,7 +305,7 @@ final class HtmlTest extends TestCase
     {
 		$str = 'tatayoyo@free.fr';
     	$test = Html::DJNikMail($str);
-        $this->assertInternalType('string', $test);
+        $this->assertIsString($test);
     }
 
 }
