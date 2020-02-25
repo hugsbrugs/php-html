@@ -9,10 +9,9 @@
             "role": "Developer"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
-        "hugsbrugs/php-xpath": "dev-master",
-        "hugsbrugs/php-string": "dev-master",
+        "hugsbrugs/php-xpath": "1.1",
+        "hugsbrugs/php-string": "^1.1",
         "h0gar/xpath": "^0.1.4"
     },
     "autoload":{
