@@ -80,10 +80,14 @@ Check for <meta name="fragment" content="!"> tag
 $is_spa = Html::is_spa($html);
 ```
 
-
 Get all links
 ```php
 $links = Html::get_links($html);
+```
+
+Get all iframes
+```php
+$links = Html::get_iframes($html);
 ```
 
 Get external links

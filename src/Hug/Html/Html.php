@@ -576,6 +576,32 @@ class Html
     }
 
     /**
+     * Get All iframes from HTML page
+     *
+     * @param string $html
+     * @return array $iframes
+     */
+    public static function get_iframes($html)
+    {
+        $iframes = [];
+
+        $myDom = new \DOMDocument;
+        @$myDom->loadHTML($html);
+        $xpath = new \DOMXPath($myDom);
+
+        # HTML5
+        $QueryResults = $xpath->query('//iframe');
+        foreach ($QueryResults as $QueryResult)
+        {
+            $iframes[] = [
+                'src' => $QueryResult->getAttribute('src')
+            ];
+        }
+        
+        return $iframes;
+    }
+
+    /**
      * Get All External Links of given webpage
      *
      * @param string $html

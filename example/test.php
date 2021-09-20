@@ -142,6 +142,14 @@ echo 'Html::get_links' . "\n";
 echo var_dump($test) . "\n";
 
 /* ************************************************* */
+/* ***************** Html::get_iframes *************** */
+/* ************************************************* */
+$html = file_get_contents(__DIR__ . '/../data/www.customdom.com.html');
+$test = Html::get_iframes($html);
+echo 'Html::get_iframes' . "\n";
+echo var_dump($test) . "\n";
+
+/* ************************************************* */
 /* ************ Html::get_external_links *********** */
 /* ************************************************* */
 

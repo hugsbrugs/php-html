@@ -28,6 +28,8 @@ final class HtmlTest extends TestCase
 
         $this->html_links = file_get_contents($data . '/hugo.maugey.fr.html');
         $this->url_links = 'https://hugo.maugey.fr/developeur-web/Linux?_escaped_fragment_';
+
+        $this->html_iframes = file_get_contents($data . '/www.customdom.com.html');
 	}
 
     /* ************************************************* */
@@ -249,6 +251,20 @@ final class HtmlTest extends TestCase
         $test = Html::get_links($this->html_links);
         $this->assertIsArray($test);
         $this->assertTrue(count($test)===59);
+    }
+
+    /* ************************************************* */
+    /* **************** Html::get_iframes ************** */
+    /* ************************************************* */
+
+    /**
+     *
+     */
+    public function testCanGetIframes()
+    {
+        $test = Html::get_iframes($this->html_iframes);
+        $this->assertIsArray($test);
+        $this->assertTrue(count($test)===2);
     }
 
 
